@@ -21,6 +21,6 @@ COPY CMakeLists.txt CMakeLists.txt
 COPY extern/CMakeLists.txt.googletest extern/CMakeLists.txt.googletest
 COPY extern/CMakeLists.txt.spdlog extern/CMakeLists.txt.spdlog
 
-RUN ls -alh
 RUN cmake .
 RUN make
+RUN bin/main_test && bin/main
