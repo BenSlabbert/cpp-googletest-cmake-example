@@ -1,5 +1,9 @@
 .idea/
-extern/
+
+!extern/CMakeLists.txt.spdlog
+!extern/CMakeLists.txt.googletest
+extern
+
 bin/
 *.iml
 CMakeCache.txt

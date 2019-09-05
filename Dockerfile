@@ -1,6 +1,9 @@
 FROM ubuntu:bionic
 
-RUN apt update -qq --fix-missing && apt install -f && apt upgrade -y && apt install -y build-essential git wget
+RUN apt-get update --fix-missing && \
+    apt-get install -f && \
+    apt-get upgrade -y && \
+    apt-get install -y build-essential git wget
 
 ARG CMAKE_VERSION=3.15.2
 
@@ -15,6 +18,8 @@ RUN cmake --version
 WORKDIR /app
 COPY src src
 COPY CMakeLists.txt CMakeLists.txt
+COPY extern/CMakeLists.txt.googletest extern/CMakeLists.txt.googletest
+COPY extern/CMakeLists.txt.spdlog extern/CMakeLists.txt.spdlog
 
 RUN ls -alh
 RUN cmake .
