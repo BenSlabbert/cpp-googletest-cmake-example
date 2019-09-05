@@ -1,0 +1,12 @@
+.idea/
+extern/
+bin/
+*.iml
+CMakeCache.txt
+CMakeFiles
+cmake-build-debug
+cmake_install.cmake
+*.cbp
+*.cmake
+*.pc
+*.log
