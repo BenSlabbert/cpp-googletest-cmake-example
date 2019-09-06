@@ -4,13 +4,22 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
 cmake_minimum_required(VERSION 3.14)
 project(cpp_googletest_cmake_example)
-
+include(CTest)
 set(CMAKE_CXX_STANDARD 17)
+
+# Set the compiler options
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
+
+# define the library first before anything that depends on it
+add_subdirectory(proxy)
+add_subdirectory(cmd)
 
 ########################################################################################################################
 # Dependencies
 ########################################################################################################################
-
 # googletest
 # Download and unpack googletest at configure time
 configure_file(extern/CMakeLists.txt.googletest extern/googletest-download/CMakeLists.txt)
@@ -45,7 +54,6 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif ()
 
 ########################################################################################################################
-
 configure_file(extern/CMakeLists.txt.spdlog extern/spdlog-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
         RESULT_VARIABLE result
@@ -67,12 +75,12 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/extern/spdlog-src
 ########################################################################################################################
 # Link Tests
 ########################################################################################################################
-add_executable(main_test src/main_test.cpp)
-target_link_libraries(main_test gtest_main)
-add_test(NAME main_test COMMAND main_test)
+#add_executable(main_test src/main_test.cpp)
+#target_link_libraries(main_test gtest_main)
+#add_test(NAME main_test COMMAND main_test)
 
 ########################################################################################################################
 # Main exec
 ########################################################################################################################
-add_executable(main src/main.cpp)
-target_link_libraries(main spdlog)
+#add_executable(main cmd/main.cpp)
+#target_link_libraries(main spdlog)

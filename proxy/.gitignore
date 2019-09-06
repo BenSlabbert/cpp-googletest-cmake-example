@@ -17,5 +17,3 @@ cmake_install.cmake
 Makefile
 *.tcl
 lib/
-Testing/
-coverage/

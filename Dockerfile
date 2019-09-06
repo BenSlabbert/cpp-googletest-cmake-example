@@ -16,11 +16,13 @@ RUN ./bootstrap && make && make install
 RUN cmake --version
 
 WORKDIR /app
-COPY src src
+COPY cmd cmd
+COPY proxy proxy
 COPY CMakeLists.txt CMakeLists.txt
 COPY extern/CMakeLists.txt.googletest extern/CMakeLists.txt.googletest
 COPY extern/CMakeLists.txt.spdlog extern/CMakeLists.txt.spdlog
 
 RUN cmake .
 RUN make
-RUN bin/main_test && bin/main
+RUN ctest -C Debug -V
+RUN make gcov
